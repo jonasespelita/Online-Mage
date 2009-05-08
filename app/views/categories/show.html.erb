@@ -1,0 +1,20 @@
+<h1> <%= @category.name %> Articles:</h1>
+<% if logged_in? %>
+  <%= link_to "Contribute new #{@category.name} article", new_category_article_path(@category) %>
+  <br/>
+<% end %>
+<% if @articles.size ==0 %>
+  No Articles Here!
+<% end %>
+<% for article in @articles %>
+
+  <%=  show_article(article)%>
+
+
+<% end %>
+
+
+
+<br />
+
+

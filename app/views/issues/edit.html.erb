@@ -1,0 +1,21 @@
+<h1>Editing issue</h1>
+
+<% form_for(@issue) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :volume %><br />
+    <%= f.text_field :volume %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @issue %> |
+<%= link_to 'Back', issues_path %>

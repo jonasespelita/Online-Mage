@@ -1,0 +1,16 @@
+
+<% unless @issue.nil?  %>
+  Link Trail: <%= link_to 'Issues', issues_path%> >> <%= link_to @issue.name, issue_path(@issue) %>
+  >> <%= link_to @article.title, issue_article_path(@issue) %>
+<% end %>
+<%= show_article @article %>
+<%= show_comments_for(@article) %>
+<p><b><%= flash[:notice] %></b></p>
+<% if logged_in? %>
+  <%= link_to 'Edit',  edit_article_path(@article) %> |
+<% end %>
+<% unless @issue.nil?  %>
+  <%= link_to 'Back', issue_path(@issue)%>
+<% else%>
+<%= link_to 'Back', root_path%>
+<% end %>

@@ -1,0 +1,13 @@
+
+  <h3>Showing Issue: <%= @articles.first.issue.name %></h3>
+  <% if logged_in? %>
+<b><%= link_to 'Contribute article', new_article_path %></b>
+  <% end %>
+
+<% for article in @articles%>
+    <%=  show_article article%>
+    <%= show_comments_for(article) %>
+    <% end %>
+
+
+

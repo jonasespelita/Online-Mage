@@ -1,0 +1,52 @@
+Link Trail: <%= link_to 'Issues', issues_path%> >> <%= link_to @issue.name, issue_path(@issue) %>
+
+<p>
+  <b>Volume:</b>
+  <%=h @issue.volume %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @issue.name %>
+</p>
+<%= link_to 'Edit Issue Details', edit_issue_path(@issue) %> <br/>
+
+
+<p>
+  <b>Articles:</b>
+  <table>
+    <tr>
+      <th width="100">Title</th>
+      <th width ="75">Category</th>
+    </tr>
+    <% for article in @issue.articles %>
+      <tr>
+        <td><%= link_to article.title, issue_article_path(@issue, article) %></td>
+        <td><%= article.category.name %></td
+        <td><%= link_to 'Remove Article', remove_article_issue_path(@issue, :article_id => article.id) %></td>
+      </tr>
+    <% end %>
+  </table>
+
+</p>
+<br/><br/>
+
+<%= link_to 'Add Article', articles_path%> <br/><br/>
+  <b>Categories:</b>
+<table>
+  <% for category in @issue.categories %>
+    <tr>
+      <td> <%= category.name %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'Add Category',new_issue_category_path(@issue) %>
+<br/><br/>
+
+
+<% unless @site_stat.current_issue_id == @issue.id %>
+      <td><%= link_to '<b>Publish!</b>', publish_issue_path(@issue)  %></td>
+      <% else %>
+      <td><b>Current Issue</b></td>
+      <% end %><br/>
+<%= link_to 'Back', issues_path %>

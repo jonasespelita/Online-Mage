@@ -1,0 +1,22 @@
+
+Link Trail: <%= link_to 'Issues', issues_path%> >> <%= link_to session[:selected_issue].name, issue_path(session[:selected_issue]) %>
+>> Unpublished Articles
+<h1>Unpublished Articles:</h1>
+
+
+<% if @articles.size==0 %>
+  <span>No articles here...</span>
+<% end %>
+
+<% for article in @articles %>
+  <%= show_article article %>
+<%= show_comments_for(article) %>
+
+
+<% end %>
+
+
+  <% if logged_in? %>
+    <br/><b><%= link_to 'Contribute article for next issue', new_article_path %></b>
+  <% end %>
+

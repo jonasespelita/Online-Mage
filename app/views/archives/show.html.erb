@@ -1,0 +1,16 @@
+<h1>Issue Archives</h1>
+
+
+<% @archived_years.sort.each do |year, issues| %>
+  <h2><%= year.strftime('%Y') %></h2>
+  <% issues.group_by { |a| a.created_at.beginning_of_month}.sort.each do |month, issues|%>
+    <h3><%= month.strftime('%B') %></h3>
+    <ul>
+    <% for issue in issues%>
+
+
+      <li><%= link_to issue.name, root_path(:issue_id=>issue.id)  %></li>
+    <% end %>
+    </ul>
+  <% end %>
+<% end %>

@@ -1,0 +1,42 @@
+<% unless @issue.nil?  %>
+Link Trail: <%= link_to 'Issues', issues_path%> >> <%= link_to @issue.name, issue_path(@issue) %>
+>> Editing <%= @article.title %>
+<% end %>
+
+<h1>Editing article</h1>
+
+<% form_for(@article) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_area :body, :cols => "25", :rows=>"3", :class=>"widgEditor" %>
+  </p>
+
+  <% unless @categories.size ==0 || !user_is_admin?%>
+  <p>
+      <%= f.label :category_id %><br/>
+      <%= f.select :category_id, @categories.collect {|p| [ p.name, p.id ]}  %>
+
+    </p>
+    <% end %>
+
+
+      <% if current_user.is_admin? %>
+
+  <% end %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @article %> |
+<% if @issue.nil? %>
+<%= link_to 'Back', article_path %>
+<% else %>
+<%= link_to 'Back', issue_path(@issue)%>
+<% end%>

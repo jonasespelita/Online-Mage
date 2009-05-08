@@ -1,0 +1,29 @@
+<h1>Unapproved Comments</h1>
+<% if @unapproved_comments.size==0 %>
+  No comments here!
+<% end %>
+<% @unapproved_comments.group_by { |comment| comment.article  }.each do |article, comments| %>
+  <h3>Article: <%= article.title %></h3>
+  <ul>
+    <% for  comment in comments %>
+      <li><%= comment.body %></li>
+      <%= link_to "Approve", approve_comment_url(comment) %> |
+      <%= link_to "Discard", comment, :confirm => 'Are you sure you want to delete this comment?' ,:method => :delete  %>
+
+    <% end %>
+  </ul>
+<% end %>
+
+<h1>Approved Comments</h1>
+<% if @approved_comments.size==0 %>
+  No comments here!
+<% end %>
+<% @approved_comments.group_by { |comment| comment.article  }.each do |article, comments| %>
+  <h3>Article: <%= article.title %></h3>
+  <ul>
+    <% for  comment in comments %>
+      <li><%= comment.body %></li>
+        <%= link_to "Discard", comment, :confirm => 'Are you sure you want to delete this comment?' ,:method => :delete  %>
+    <% end %>
+  </ul>
+<% end %>

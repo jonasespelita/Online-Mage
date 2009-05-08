@@ -1,0 +1,22 @@
+<h1>New comment for article "<%= @article.title %>"</h1>
+
+<% form_for(@comment) do |f| %>
+  <%= f.error_messages %>
+
+
+  <p>
+    <%= f.label :body %><br />
+
+    <%= f.text_area :body, :cols => "25", :rows=>"3", :class=>"widgEditor" %>
+  </p>
+
+
+  <p>
+
+    <%= f.submit "Submit" %>
+  </p>
+
+<% end %>
+<p>NB: your comment is subject to approval by the Router Adviser.</p>
+
+<%= link_to 'Back', articles_path %>

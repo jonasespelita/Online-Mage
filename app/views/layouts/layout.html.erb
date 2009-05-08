@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title> Router - <%= params[:controller].capitalize %> </title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <%= stylesheet_link_tag "style" %>
+    <%= javascript_include_tag :defaults %>
+
+
+    <%= javascript_include_tag "widgEditor" %>
+    <%= stylesheet_link_tag "widgEditor" %>
+
+  </head>
+  <body>
+    <div class="PageBackgroundGradient"></div>
+    <div class="Main">
+
+      <div class="Sheet">
+        <div class="Sheet-body">
+          <div class="Header"></div>
+          <div class="nav">
+            <ul class="menu">
+              <li>
+                <%= link_to "<span><span>Home</span></span>", root_path,  :class => @home_active %>
+              </li>
+              <li><%= link_to "<span><span>About</span></span>",about_path %></li>
+              <% unless user_is_admin?  %>
+                <li><a href="#" class="<%= @cat_active %>"><span><span>Categories</span></span></a>
+                <ul>
+                  <% for category in @categories %>
+                    <li><%= link_to category.name, category unless category.name=="Uncategorized"%></li>
+
+                  <% end %>
+                </ul>
+              </li>
+              <% else %>
+                <li><%= link_to "<span><span>Issues</span></span>", issues_path, :class => @issues_active%>
+              </li>
+              <% end %>
+             
+              <li><%= link_to "<span><span>Archive</span></span>", archive_path, :class => @archives_active  %>
+
+              </li>
+              <li><% if logged_in?  %>
+                <%= link_to "<span><span>Logout</span></span>", logout_path %></li>
+                <li><% if user_is_admin? %>
+                  <%= link_to "<span><span>Manage Comments</span></span>", comments_path  %></li>       <li>
+                  <%= link_to "<span><span>Add Users</span></span>", signup_path %><li>
+                      <span><span>Logged in as Adviser</span></span>
+
+                    <% else %>
+                      <span><span>Logged in as <%= current_user.login %></span></span>
+
+                    <% end %>
+                  <% else %>
+                    <%= link_to "<span><span>Login!</span></span>", login_path %>
+                    
+                  </li>
+                <% end %>
+
+
+              </li>
+             
+              <li style="float:right;">   <div id="search">
+
+                  <% form_tag search_articles_path, :method => 'get' do %>
+                    <p>
+                      <span id="searchbtn"><%= submit_tag "Search", :name => nil %></span>
+                      <%= text_field_tag :search, 'Search Articles', :size => 10 %>
+
+
+                    </p>
+                  <% end %>
+              </div></li>
+            </ul>
+            <div class="l"></div>
+            <div class="r"><div></div></div>
+
+          </div>
+
+
+          <div class="contentLayout">
+
+            <div class="content">
+
+
+              <div class="Block">
+                <div class="Block-body">
+
+
+                  <div class="BlockContent">
+                    <div class="BlockContent-body">
+                    
+                      <%= flash[:debug] %>
+                      <div id="current_issue" style="float:right">Current Issue: <%= @current_issue.name%></div>
+                      <%= yield %>
+
+
+
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+
+        </div>
+        <div class="Sheet-tl"></div>
+        <div class="Sheet-tr"><div></div></div>
+        <div class="Sheet-bl"><div></div></div>
+        <div class="Sheet-br"><div></div></div>
+        <div class="Sheet-tc"><div></div></div>
+        <div class="Sheet-bc"><div></div></div>
+        <div class="Sheet-cl"><div></div></div>
+        <div class="Sheet-cr"><div></div></div>
+        <div class="Sheet-cc"></div>
+      </div>
+      <div id="footer">
+        <!-- If you'd like to support this free design, having the "Design by" link somewhere on your site is the best way; it's our only promotion or advertising. -->
+        <p>All rights reserved</p>
+      </div>
+
+    </div>
+
+  </body>
+</html>
