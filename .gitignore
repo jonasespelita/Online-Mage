@@ -1,1 +1,5 @@
-sh.exe.stackdump
+log/*.log
+log/*.pid
+tmp/**/*
+config/database.yml
+db/*.sqlite3
