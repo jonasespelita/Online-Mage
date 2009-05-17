@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :photos
+  #map.resources :photos
 
-  map.resources :albums
+  map.resources :albums, :has_many => :photos
 
   map.resources :issues, :has_many =>[:articles, :categories], :member => {:add_article => :get,
                                                               :remove_article => :get,

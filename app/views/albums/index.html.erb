@@ -6,15 +6,19 @@
     <th>Description</th>
   </tr>
 
-<% for album in @albums %>
-  <tr>
-    <td><%=h album.title %></td>
-    <td><%=h album.description %></td>
-    <td><%= link_to 'Show', album %></td>
-    <td><%= link_to 'Edit', edit_album_path(album) %></td>
-    <td><%= link_to 'Destroy', album, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  <% for album in @albums %>
+    <tr>
+      <td><%=h album.title %></td>
+      <td>
+        <%= image_tag album.photos.first.photo.url(:thumb) unless album.photos.first.nil?%>
+      </td>
+
+      <td><%=h album.description %></td>
+      <td><%= link_to 'Show', album %></td>
+      <td><%= link_to 'Edit', edit_album_path(album) %></td>
+      <td><%= link_to 'Destroy', album, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
 </table>
 
 <br />

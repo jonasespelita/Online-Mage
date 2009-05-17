@@ -1,3 +1,8 @@
+
+<p>
+  <%= image_tag @photo.photo.url %>
+</p>
+
 <p>
   <b>Title:</b>
   <%=h @photo.title %>
@@ -9,5 +14,7 @@
 </p>
 
 
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+<%= link_to 'Edit', edit_album_photo_path( @album ,@photo) %> |
+<%= link_to 'Back', album_photos_path(@album) %>
+<%= link_to 'Next', album_photo_path(@album, @next_photo) %>
+<%= link_to 'Previous', album_photo_path(@album, @prev_photo) %>
